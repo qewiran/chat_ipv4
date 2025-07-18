@@ -24,9 +24,9 @@ trap cleanup EXIT
 
 {
   cd "${temp_build_dir}" || exit 1  
-  cmake  -G "${build_system}" "$@" .. || { echo "CMake fail"; rm -rf build; exit 1; }
+  cmake  -G "${build_system}" "$@" .. || { echo "CMake fail"; rm -rf ${temp_build_dir}; exit 1; }
   echo "▸ Сборка..."
-  "${build_system_bin}" || { echo "Build fail"; rm -rf build; exit 1; }
+  "${build_system_bin}" || { echo "Build fail"; rm -rf ${temp_build_dir}; exit 1; }
   mv chat .. 2>/dev/null
 }
 
